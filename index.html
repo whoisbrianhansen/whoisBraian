@@ -1297,7 +1297,7 @@ Shot & edited by Brian Hansen`,
               ${
                 item.credits
                   ? `<p class="description project-credits">${item.credits
-                      .map(([role, name]) => `${role}<br />${name}`)
+                      .map(([role, name]) => `${role} ${name}`)
                       .join("<br />")}</p>`
                   : ""
               }

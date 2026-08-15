@@ -91,6 +91,7 @@ assert.match(html, /function hydrateSlidesAround\(\)/, "Expected nearby-only car
 assert.match(html, /deferImages: true/, "Expected below-the-fold carousel loading to be deferred");
 assert.match(html, /data-srcset="assets\/photography\/web-1200/, "Expected responsive photography assets");
 assert.match(html, /class="description project-credits"/, "Expected film credits to match carousel descriptions");
+assert.match(html, /\.map\(\(\[role, name\]\) => `\$\{role\} \$\{name\}`\)/, "Expected roles and names on one line");
 assert.doesNotMatch(css, /\.project-credits dt/, "Expected regular-weight No More Movies credits");
 assert.match(html, /preload="none"/, "Expected local video loading to be deferred until playback");
 assert.match(html, /actorVideo\.pause\(\)/, "Expected PLACEBO pause support");
