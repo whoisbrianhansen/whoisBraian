@@ -376,23 +376,7 @@
       }
 
       .project-credits {
-        display: grid;
-        gap: 10px;
-        margin: 10px 0 0;
-        color: var(--muted);
-        font-size: 13px;
-        line-height: 1.35;
-      }
-
-      .project-credits div,
-      .project-credits dt,
-      .project-credits dd {
-        margin: 0;
-      }
-
-      .project-credits dt {
-        color: var(--ink);
-        font-weight: 700;
+        margin-top: 10px !important;
       }
 
       .slide-caption .credits-columns {
@@ -1312,9 +1296,9 @@ Shot & edited by Brian Hansen`,
               <p class="description${item.creditsColumns ? " credits-columns" : ""}">${item.desc}</p>
               ${
                 item.credits
-                  ? `<dl class="project-credits">${item.credits
-                      .map(([role, name]) => `<div><dt>${role}</dt><dd>${name}</dd></div>`)
-                      .join("")}</dl>`
+                  ? `<p class="description project-credits">${item.credits
+                      .map(([role, name]) => `${role}<br />${name}`)
+                      .join("<br />")}</p>`
                   : ""
               }
             </div>

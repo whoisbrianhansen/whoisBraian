@@ -90,6 +90,8 @@ assert.match(html, /!iframe\.getAttribute\("src"\)/, "Expected stopped Vimeo pla
 assert.match(html, /function hydrateSlidesAround\(\)/, "Expected nearby-only carousel image loading");
 assert.match(html, /deferImages: true/, "Expected below-the-fold carousel loading to be deferred");
 assert.match(html, /data-srcset="assets\/photography\/web-1200/, "Expected responsive photography assets");
+assert.match(html, /class="description project-credits"/, "Expected film credits to match carousel descriptions");
+assert.doesNotMatch(css, /\.project-credits dt/, "Expected regular-weight No More Movies credits");
 assert.match(html, /preload="none"/, "Expected local video loading to be deferred until playback");
 assert.match(html, /actorVideo\.pause\(\)/, "Expected PLACEBO pause support");
 assert.match(html, /Pausar PLACEBO/, "Expected an accessible PLACEBO pause control");
