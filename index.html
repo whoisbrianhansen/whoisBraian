@@ -7,6 +7,10 @@
       name="description"
       content="Portfolio de Brian Hansen: director y fotografo con trabajos en video, shortfilms y fotografia 35mm."
     />
+    <link rel="preconnect" href="https://i.vimeocdn.com" />
+    <link rel="preconnect" href="https://player.vimeo.com" />
+    <link rel="dns-prefetch" href="//i.vimeocdn.com" />
+    <link rel="dns-prefetch" href="//player.vimeo.com" />
     <title>Brian Hansen | Director &amp; Photographer</title>
     <style>
       :root {
@@ -698,6 +702,10 @@
           class="memento-cover-static"
           src="assets/memento/memento-cover.jpg"
           alt="Tapa del libro Memento"
+          width="1200"
+          height="816"
+          loading="lazy"
+          decoding="async"
         />
 
         <div class="memento-note">
@@ -734,8 +742,20 @@
 
         <article class="video-slide is-active actor-feature">
           <div class="video-embed">
-            <img src="assets/actor/PLACEBO%20COVER.png" alt="Portada de PLACEBO" />
-            <video preload="metadata" playsinline src="assets/actor/PLACEBO-web.m4v"></video>
+            <img
+              src="assets/actor/PLACEBO-COVER-web.jpg"
+              alt="Portada de PLACEBO"
+              width="1920"
+              height="1145"
+              loading="lazy"
+              decoding="async"
+            />
+            <video
+              preload="none"
+              playsinline
+              poster="assets/actor/PLACEBO-COVER-web.jpg"
+              src="assets/actor/PLACEBO-web.m4v"
+            ></video>
             <button class="play-toggle" type="button" aria-label="Reproducir PLACEBO">Play</button>
           </div>
           <div class="slide-caption">
@@ -961,9 +981,9 @@ Shot & edited by Brian Hansen`,
 
       function mediaTag(item) {
         if (item.kind === "video") {
-          return `<video preload="metadata" playsinline src="${item.src}"></video>`;
+          return `<video preload="none" playsinline src="${item.src}"></video>`;
         }
-        return `<iframe title="${item.title}" data-src="${item.src}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+        return `<iframe title="${item.title}" data-src="${item.src}" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
       }
 
       function cloneSlide(slide) {
@@ -1022,6 +1042,7 @@ Shot & edited by Brian Hansen`,
         items,
         renderItem,
         onSelect,
+        deferImages = false,
       }) {
         if (!track || !viewport || !prev || !next || !countEl || !items.length) return;
 
@@ -1035,6 +1056,21 @@ Shot & edited by Brian Hansen`,
         let hasDragged = false;
         let isAnimating = false;
         let pendingDirections = [];
+        let imageHydrationEnabled = !deferImages;
+
+        function hydrateSlidesAround() {
+          if (!imageHydrationEnabled) return;
+
+          slides.forEach((slide, index) => {
+            if (Math.abs(index - activeIndex) > 1) return;
+            slide.querySelectorAll("img[data-src]").forEach((image) => {
+              if (image.dataset.srcset && !image.getAttribute("srcset")) {
+                image.setAttribute("srcset", image.dataset.srcset);
+              }
+              if (!image.getAttribute("src")) image.setAttribute("src", image.dataset.src);
+            });
+          });
+        }
 
         function updateCount() {
           countEl.textContent = `${String(activeRealIndex + 1).padStart(2, "0")} / ${String(items.length).padStart(2, "0")}`;
@@ -1042,6 +1078,7 @@ Shot & edited by Brian Hansen`,
 
         function updateActive() {
           slides.forEach((slide, idx) => slide.classList.toggle("is-active", idx === activeIndex));
+          hydrateSlidesAround();
         }
 
         function position(animate = true) {
@@ -1144,6 +1181,19 @@ Shot & edited by Brian Hansen`,
         updateCount();
         position(false);
 
+        if (deferImages) {
+          const imageObserver = new IntersectionObserver(
+            ([entry]) => {
+              if (!entry.isIntersecting) return;
+              imageHydrationEnabled = true;
+              hydrateSlidesAround();
+              imageObserver.disconnect();
+            },
+            { rootMargin: "400px 0px" },
+          );
+          imageObserver.observe(viewport);
+        }
+
         if (items.length === 1) {
           prev.disabled = true;
           next.disabled = true;
@@ -1201,7 +1251,12 @@ Shot & edited by Brian Hansen`,
         renderItem: (item, index) => `
           <article class="video-slide${index === 0 ? " is-active" : ""}" data-index="${index}">
             <div class="video-embed">
-              <img src="${item.still}" alt="Still de ${item.title}" />
+              <img
+                data-src="${item.still}"
+                alt="Still de ${item.title}"
+                decoding="async"
+                fetchpriority="${index === 0 ? "high" : "low"}"
+              />
               ${mediaTag({ kind: "iframe", title: item.title, src: item.src })}
               <button class="play-toggle" type="button" aria-label="Reproducir ${item.title}">Play</button>
             </div>
@@ -1231,15 +1286,17 @@ Shot & edited by Brian Hansen`,
           <figure class="photography-slide${index === 0 ? " is-active" : ""}" data-index="${index}">
             <div class="photography-frame">
               <img
-                src="assets/photography/${encodeURIComponent(item.file)}"
+                data-src="assets/photography/web-1200/${encodeURIComponent(item.file)}"
+                data-srcset="assets/photography/web-1200/${encodeURIComponent(item.file)} 1200w, assets/photography/web-2000/${encodeURIComponent(item.file)} 2000w"
+                sizes="(max-width: 740px) 88vw, (max-width: 1265px) 68vw, 860px"
                 alt="${item.label}"
-                loading="lazy"
                 decoding="async"
               />
             </div>
             <figcaption class="photography-caption">${item.label}</figcaption>
           </figure>
         `,
+        deferImages: true,
       });
 
       const ambulanteViewport = document.querySelector("#ambulante .slider-viewport");
@@ -1258,7 +1315,7 @@ Shot & edited by Brian Hansen`,
         renderItem: (item, index) => `
           <article class="video-slide${index === 0 ? " is-active" : ""}" data-index="${index}">
             <div class="video-embed">
-              <img src="${item.still}" alt="Still de ${item.title}" />
+              <img data-src="${item.still}" alt="Still de ${item.title}" decoding="async" fetchpriority="low" />
               ${mediaTag({ kind: "iframe", title: item.title, src: item.src })}
               <button class="play-toggle" type="button" aria-label="Reproducir ${item.title}">Play</button>
             </div>
@@ -1269,6 +1326,7 @@ Shot & edited by Brian Hansen`,
             </div>
           </article>
         `,
+        deferImages: true,
       });
 
       const actorFeature = document.querySelector(".actor-feature");

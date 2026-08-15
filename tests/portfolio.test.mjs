@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, statSync } from "node:fs";
 
 const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
 const css = html.match(/<style>([\s\S]*?)<\/style>/)?.[1] ?? "";
@@ -27,7 +27,7 @@ const requiredHtml = [
   'id="contact"',
   "CONTACT",
   "assets/memento/memento-cover.jpg",
-  "assets/actor/PLACEBO%20COVER.png",
+  "assets/actor/PLACEBO-COVER-web.jpg",
   "assets/actor/PLACEBO-web.m4v",
   "Writer &amp; Director: Sage Bennett",
   "Starring: Sage Bennett &amp; Brian Hansen",
@@ -45,7 +45,7 @@ for (const snippet of requiredHtml) {
 
 for (const asset of [
   "../assets/memento/memento-cover.jpg",
-  "../assets/actor/PLACEBO COVER.png",
+  "../assets/actor/PLACEBO-COVER-web.jpg",
   "../assets/actor/PLACEBO-web.m4v",
 ]) {
   assert.ok(existsSync(new URL(asset, import.meta.url)), `Expected local asset ${asset}`);
@@ -64,6 +64,12 @@ for (const [, filename] of photographyItems.matchAll(/file: "([^"]+)"/g)) {
     existsSync(new URL(`../assets/photography/${filename}`, import.meta.url)),
     `Expected photography asset ${filename}`,
   );
+  const smallPhoto = new URL(`../assets/photography/web-1200/${filename}`, import.meta.url);
+  const largePhoto = new URL(`../assets/photography/web-2000/${filename}`, import.meta.url);
+  assert.ok(existsSync(smallPhoto), `Expected 1200px photography asset ${filename}`);
+  assert.ok(existsSync(largePhoto), `Expected 2000px photography asset ${filename}`);
+  assert.ok(statSync(smallPhoto).size < 650_000, `Expected lightweight 1200px asset ${filename}`);
+  assert.ok(statSync(largePhoto).size < 1_600_000, `Expected lightweight 2000px asset ${filename}`);
 }
 
 assert.match(html, /function attachLoopCarousel\(/, "Expected a shared carousel controller");
@@ -71,7 +77,12 @@ assert.match(html, /function resetLoop\(\)/, "Expected circular carousel navigat
 assert.match(html, /track\.style\.transform = `translateX/, "Expected centered horizontal tracks");
 assert.match(html, /video\.play\(\)\.catch/, "Expected local video playback support");
 assert.match(html, /iframe\.src = ""/, "Expected inactive Vimeo players to stop");
+assert.match(html, /function hydrateSlidesAround\(\)/, "Expected nearby-only carousel image loading");
+assert.match(html, /deferImages: true/, "Expected below-the-fold carousel loading to be deferred");
+assert.match(html, /data-srcset="assets\/photography\/web-1200/, "Expected responsive photography assets");
+assert.match(html, /preload="none"/, "Expected local video loading to be deferred until playback");
 assert.doesNotMatch(html, /assets\/actor\/PLACEBO\.mp4/, "Expected the GitHub-compatible PLACEBO video");
+assert.doesNotMatch(html, /assets\/actor\/PLACEBO%20COVER\.png/, "Expected the optimized PLACEBO cover");
 
 assert.match(css, /--paper:\s*#f7f5ef/, "Expected the off-white site palette");
 assert.match(css, /\.video-track,[\s\S]*?gap:\s*0;/, "Expected flush carousel tracks");
