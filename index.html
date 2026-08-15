@@ -339,6 +339,11 @@
         pointer-events: none;
       }
 
+      .video-track .video-slide:not(.is-active) .play-toggle {
+        opacity: 0;
+        pointer-events: none;
+      }
+
       .actor-feature.is-playing .play-toggle {
         opacity: 1;
         pointer-events: auto;
@@ -1108,7 +1113,12 @@ Shot & edited by Brian Hansen`,
         }
 
         function updateActive() {
-          slides.forEach((slide, idx) => slide.classList.toggle("is-active", idx === activeIndex));
+          slides.forEach((slide, idx) => {
+            const isActive = idx === activeIndex;
+            slide.classList.toggle("is-active", isActive);
+            const playButton = slide.querySelector(".play-toggle");
+            if (playButton) playButton.disabled = !isActive;
+          });
           hydrateSlidesAround();
         }
 
@@ -1244,6 +1254,7 @@ Shot & edited by Brian Hansen`,
           if (playButton) {
             playButton.addEventListener("click", (event) => {
               event.stopPropagation();
+              if (!slide.classList.contains("is-active")) return;
               playSlide(slide);
             });
           }

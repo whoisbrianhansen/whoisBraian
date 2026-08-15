@@ -86,6 +86,8 @@ for (const [, filename] of photographyItems.matchAll(/file: "([^"]+)"/g)) {
 }
 
 assert.match(html, /function attachLoopCarousel\(/, "Expected a shared carousel controller");
+assert.match(html, /playButton\.disabled = !isActive/, "Expected only the centered video play button to be enabled");
+assert.match(css, /\.video-track \.video-slide:not\(\.is-active\) \.play-toggle/, "Expected side video controls to be hidden");
 assert.match(html, /function resetLoop\(\)/, "Expected circular carousel navigation");
 assert.match(html, /track\.style\.transform = `translateX/, "Expected centered horizontal tracks");
 assert.match(html, /video\.play\(\)\.catch/, "Expected local video playback support");
