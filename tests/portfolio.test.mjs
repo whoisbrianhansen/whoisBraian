@@ -31,6 +31,8 @@ const requiredHtml = [
   "assets/actor/PLACEBO-web.m4v",
   "Writer &amp; Director: Sage Bennett",
   "Starring: Sage Bennett &amp; Brian Hansen",
+  "I wanted to transform those painpoints into art.",
+  '<p class="actor-quote-author">SAGE BENNETT</p>',
   "player.vimeo.com/video/1038807040",
   "player.vimeo.com/video/1160375315",
   "player.vimeo.com/video/1160387061",
