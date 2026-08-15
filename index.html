@@ -375,6 +375,26 @@
         white-space: pre-line;
       }
 
+      .project-credits {
+        display: grid;
+        gap: 10px;
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.35;
+      }
+
+      .project-credits div,
+      .project-credits dt,
+      .project-credits dd {
+        margin: 0;
+      }
+
+      .project-credits dt {
+        color: var(--ink);
+        font-weight: 700;
+      }
+
       .slide-caption .credits-columns {
         column-count: 2;
         column-gap: clamp(24px, 4vw, 56px);
@@ -851,6 +871,14 @@
           meta: "Short film / 2025",
           desc:
             "Through a man’s Super 8mm camera, we see a young woman, slices of a shared life. Between old movies<br />and motorcycle trips, we glimpse the longing for what might have been.",
+          credits: [
+            ["Written and Directed by", "Brian Hansen"],
+            ["Starring", "Camila Araiza"],
+            ["Original Score by", "Agustín Ayala"],
+            ["Sound Production by", "Miguel Cham"],
+            ["Voice-over and Cinematography by", "Brian Hansen"],
+            ["Super 8mm Film Processing and Scanning by", "LAB TANK"],
+          ],
           still: "https://i.vimeocdn.com/video/2071306256-d37beba1914ae147e707527c3e86667fc1a6af97c6951a404f28686cd6ac36c1-d_1280?region=us",
           src: "https://player.vimeo.com/video/1038807040?autoplay=1&title=0&byline=0&portrait=0",
         },
@@ -1282,6 +1310,13 @@ Shot & edited by Brian Hansen`,
               <p class="meta">${item.meta}</p>
               <h2>${item.title}</h2>
               <p class="description${item.creditsColumns ? " credits-columns" : ""}">${item.desc}</p>
+              ${
+                item.credits
+                  ? `<dl class="project-credits">${item.credits
+                      .map(([role, name]) => `<div><dt>${role}</dt><dd>${name}</dd></div>`)
+                      .join("")}</dl>`
+                  : ""
+              }
             </div>
           </article>
         `,
