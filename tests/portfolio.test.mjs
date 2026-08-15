@@ -82,6 +82,8 @@ assert.match(html, /function hydrateSlidesAround\(\)/, "Expected nearby-only car
 assert.match(html, /deferImages: true/, "Expected below-the-fold carousel loading to be deferred");
 assert.match(html, /data-srcset="assets\/photography\/web-1200/, "Expected responsive photography assets");
 assert.match(html, /preload="none"/, "Expected local video loading to be deferred until playback");
+assert.match(html, /actorVideo\.pause\(\)/, "Expected PLACEBO pause support");
+assert.match(html, /Pausar PLACEBO/, "Expected an accessible PLACEBO pause control");
 assert.doesNotMatch(html, /assets\/actor\/PLACEBO\.mp4/, "Expected the GitHub-compatible PLACEBO video");
 assert.doesNotMatch(html, /assets\/actor\/PLACEBO%20COVER\.png/, "Expected the optimized PLACEBO cover");
 

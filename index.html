@@ -339,6 +339,16 @@
         pointer-events: none;
       }
 
+      .actor-feature.is-playing .play-toggle {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .actor-feature.is-playing:not(.is-paused) .play-toggle::before {
+        content: "❚❚";
+        font-size: 16px;
+      }
+
       .slide-caption {
         display: grid;
         gap: 7px;
@@ -1330,7 +1340,34 @@ Shot & edited by Brian Hansen`,
       });
 
       const actorFeature = document.querySelector(".actor-feature");
-      actorFeature?.querySelector(".play-toggle")?.addEventListener("click", () => playSlide(actorFeature));
+      const actorVideo = actorFeature?.querySelector("video");
+      const actorPlayButton = actorFeature?.querySelector(".play-toggle");
+
+      function updateActorPlayback() {
+        if (!actorFeature || !actorVideo || !actorPlayButton) return;
+        const isPaused = actorVideo.paused;
+        actorFeature.classList.toggle("is-playing", !isPaused || actorVideo.currentTime > 0);
+        actorFeature.classList.toggle("is-paused", isPaused && actorVideo.currentTime > 0);
+        actorPlayButton.setAttribute("aria-label", isPaused ? "Reproducir PLACEBO" : "Pausar PLACEBO");
+      }
+
+      actorPlayButton?.addEventListener("click", () => {
+        if (!actorVideo) return;
+        if (actorVideo.paused) {
+          actorFeature.classList.add("is-playing");
+          actorVideo.play().catch(() => actorFeature.classList.remove("is-playing"));
+        } else {
+          actorVideo.pause();
+        }
+      });
+
+      actorVideo?.addEventListener("play", updateActorPlayback);
+      actorVideo?.addEventListener("pause", updateActorPlayback);
+      actorVideo?.addEventListener("ended", () => {
+        actorVideo.currentTime = 0;
+        actorFeature.classList.remove("is-playing", "is-paused");
+        actorPlayButton?.setAttribute("aria-label", "Reproducir PLACEBO");
+      });
     </script>
   </body>
 </html>
