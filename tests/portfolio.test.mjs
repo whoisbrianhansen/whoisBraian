@@ -33,6 +33,7 @@ const requiredHtml = [
   "Starring: Sage Bennett &amp; Brian Hansen",
   "I wanted to transform those painpoints into art.",
   '<p class="actor-quote-author">SAGE BENNETT</p>',
+  "Between old movies<br />and motorcycle trips",
   "player.vimeo.com/video/1038807040",
   "player.vimeo.com/video/1160375315",
   "player.vimeo.com/video/1160387061",
