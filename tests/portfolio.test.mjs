@@ -43,6 +43,7 @@ const requiredHtml = [
   "Official Music Video by Coco Rodriguez",
   "Art Direction & Wardrobe: Pangea",
   "A night at a rave in Patagonia. VHS diaries.\nShot & edited by Brian Hansen",
+  "moments captured<br />with a Handycam",
   "player.vimeo.com/video/1038807040",
   "player.vimeo.com/video/1160375315",
   "player.vimeo.com/video/1160387061",
