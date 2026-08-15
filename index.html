@@ -991,7 +991,7 @@ Shot & edited by Brian Hansen`,
         clone.dataset.clone = "true";
         clone.classList.remove("is-active", "is-playing");
         const iframe = clone.querySelector("iframe");
-        if (iframe) iframe.src = "";
+        if (iframe) iframe.removeAttribute("src");
         const video = clone.querySelector("video");
         if (video) {
           video.pause();
@@ -1003,7 +1003,7 @@ Shot & edited by Brian Hansen`,
       function stopSlide(slide) {
         if (!slide) return;
         const iframe = slide.querySelector("iframe");
-        if (iframe) iframe.src = "";
+        if (iframe) iframe.removeAttribute("src");
         const video = slide.querySelector("video");
         if (video) {
           video.pause();
@@ -1021,7 +1021,7 @@ Shot & edited by Brian Hansen`,
           return;
         }
         const iframe = slide.querySelector("iframe");
-        if (iframe && !iframe.src) iframe.src = iframe.dataset.src;
+        if (iframe && !iframe.getAttribute("src")) iframe.src = iframe.dataset.src;
         slide.classList.add("is-playing");
       }
 

@@ -76,7 +76,8 @@ assert.match(html, /function attachLoopCarousel\(/, "Expected a shared carousel 
 assert.match(html, /function resetLoop\(\)/, "Expected circular carousel navigation");
 assert.match(html, /track\.style\.transform = `translateX/, "Expected centered horizontal tracks");
 assert.match(html, /video\.play\(\)\.catch/, "Expected local video playback support");
-assert.match(html, /iframe\.src = ""/, "Expected inactive Vimeo players to stop");
+assert.match(html, /iframe\.removeAttribute\("src"\)/, "Expected inactive Vimeo players to stop cleanly");
+assert.match(html, /!iframe\.getAttribute\("src"\)/, "Expected stopped Vimeo players to restart");
 assert.match(html, /function hydrateSlidesAround\(\)/, "Expected nearby-only carousel image loading");
 assert.match(html, /deferImages: true/, "Expected below-the-fold carousel loading to be deferred");
 assert.match(html, /data-srcset="assets\/photography\/web-1200/, "Expected responsive photography assets");
