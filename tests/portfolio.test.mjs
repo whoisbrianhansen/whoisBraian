@@ -42,6 +42,7 @@ const requiredHtml = [
   '["Super 8mm Film Processing and Scanning by", "LAB TANK"]',
   "Official Music Video by Coco Rodriguez",
   "Art Direction & Wardrobe: Pangea",
+  "A night at a rave in Patagonia. VHS diaries.\nShot & edited by Brian Hansen",
   "player.vimeo.com/video/1038807040",
   "player.vimeo.com/video/1160375315",
   "player.vimeo.com/video/1160387061",
