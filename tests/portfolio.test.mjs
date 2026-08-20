@@ -11,6 +11,9 @@ const requiredHtml = [
   'href="#photography"',
   'id="photography"',
   "STILL PHOTO",
+  'href="#faces"',
+  'id="faces"',
+  "FACES",
   'href="#memento"',
   'id="memento"',
   "MEMENTO",
@@ -30,6 +33,7 @@ const requiredHtml = [
   "assets/actor/PLACEBO-COVER-web.jpg",
   "assets/actor/PLACEBO-web.m4v",
   "assets/bio/BRIAN-HANSEN-PORTRAIT-web.jpg",
+  "assets/faces/faces-collage.jpg",
   "In 2018, he co-founded the <em>Taller Ambulante de Fotografía</em>",
   "<em>Taller Ambulante de Cine Documental</em>",
   "Writer &amp; Director: Sage Bennett",
@@ -71,6 +75,7 @@ for (const asset of [
   "../assets/actor/PLACEBO-COVER-web.jpg",
   "../assets/actor/PLACEBO-web.m4v",
   "../assets/bio/BRIAN-HANSEN-PORTRAIT-web.jpg",
+  "../assets/faces/faces-collage.jpg",
 ]) {
   assert.ok(existsSync(new URL(asset, import.meta.url)), `Expected local asset ${asset}`);
 }
@@ -138,5 +143,8 @@ assert.match(css, /grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/, "Exp
 assert.match(css, /\.bio-portrait img \{[\s\S]*?width:\s*100%;[\s\S]*?height:\s*auto;/, "Expected the complete BIO portrait to remain visible");
 assert.match(css, /\.bio-copy \{[\s\S]*?font-size:\s*13px;[\s\S]*?line-height:\s*1\.48;/, "Expected compact BIO copy beside the portrait");
 assert.match(css, /\.description \.synopsis-line \{[\s\S]*?white-space:\s*nowrap;/, "Expected the Nacozari synopsis to hold its two-line layout on desktop");
+assert.match(css, /\.faces-scroll \{[\s\S]*?overflow-y:\s*auto;/, "Expected the FACES archive to scroll inside its window");
+assert.match(css, /\.faces-window::before,[\s\S]*?\.faces-window::after/, "Expected matching FACES fades above and below the window");
+assert.ok(statSync(new URL("../assets/faces/faces-collage.jpg", import.meta.url)).size < 1_500_000, "Expected an optimized FACES collage");
 
 console.log("Portfolio checks passed");

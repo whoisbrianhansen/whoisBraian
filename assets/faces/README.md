@@ -1,5 +1,5 @@
 # FACES
 
-Place the portrait PDF in this folder and name it `FACES.pdf`.
+The local source PDF is named `FACES.pdf` and is intentionally excluded from Git because of its size.
 
-The PDF will be converted into optimized web images before the FACES section is published.
+The web section uses the optimized `faces-collage.jpg` export.

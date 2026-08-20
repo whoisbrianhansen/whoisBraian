@@ -494,6 +494,53 @@
         font-size: 12px;
       }
 
+      .faces-window {
+        position: relative;
+        width: min(68vw, 860px);
+        height: clamp(420px, 52vw, 620px);
+        margin: 0 auto;
+        overflow: hidden;
+        background: var(--soft);
+      }
+
+      .faces-scroll {
+        height: 100%;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scrollbar-width: none;
+      }
+
+      .faces-scroll::-webkit-scrollbar {
+        display: none;
+      }
+
+      .faces-collage {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .faces-window::before,
+      .faces-window::after {
+        content: "";
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        right: 0;
+        height: 18%;
+        pointer-events: none;
+      }
+
+      .faces-window::before {
+        top: 0;
+        background: linear-gradient(to bottom, rgba(247, 245, 239, 0.86), rgba(247, 245, 239, 0));
+      }
+
+      .faces-window::after {
+        bottom: 0;
+        background: linear-gradient(to top, rgba(247, 245, 239, 0.86), rgba(247, 245, 239, 0));
+      }
+
       .memento-block {
         display: grid;
         gap: 16px;
@@ -668,6 +715,11 @@
           width: 88vw;
         }
 
+        .faces-window {
+          width: 88vw;
+          height: clamp(400px, 112vw, 560px);
+        }
+
         .memento-note {
           width: 88vw;
         }
@@ -721,6 +773,7 @@
       <nav class="nav-links" aria-label="Secciones">
         <a href="#film">Film</a>
         <a href="#photography">Still Photo</a>
+        <a href="#faces">Faces</a>
         <a href="#memento">Memento</a>
         <a href="#ambulante">Taller de cine</a>
         <a href="#actor">Selected acting work</a>
@@ -766,6 +819,28 @@
             <button class="slider-next photography-next" type="button" aria-label="Foto siguiente">›</button>
           </div>
         </section>
+      </section>
+
+      <section class="section" id="faces" aria-labelledby="faces-title">
+        <div class="section-heading">
+          <div class="section-heading-copy">
+            <h2 id="faces-title">FACES</h2>
+          </div>
+        </div>
+
+        <div class="faces-window">
+          <div class="faces-scroll" tabindex="0" aria-label="Archivo desplazable de retratos">
+            <img
+              class="faces-collage"
+              src="assets/faces/faces-collage.jpg"
+              alt="Collage de retratos de Brian Hansen"
+              width="1120"
+              height="3760"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
       </section>
 
       <section class="section" id="memento" aria-labelledby="memento-title">
