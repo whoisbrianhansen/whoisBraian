@@ -678,6 +678,10 @@
       }
 
       @media (max-width: 740px) {
+        html {
+          scroll-padding-top: calc(var(--mobile-header-height, 143px) + 8px);
+        }
+
         .slide-caption .credits-columns {
           column-count: 1;
         }
@@ -689,7 +693,7 @@
 
         main {
           width: min(var(--max), calc(100% - 22px));
-          padding-top: 126px;
+          padding-top: calc(var(--mobile-header-height, 143px) + 8px);
         }
 
         .section-heading {
@@ -1000,6 +1004,15 @@
     </main>
 
     <script>
+      const siteHeader = document.querySelector(".site-header");
+
+      function syncMobileHeaderHeight() {
+        document.documentElement.style.setProperty("--mobile-header-height", `${siteHeader.offsetHeight}px`);
+      }
+
+      syncMobileHeaderHeight();
+      new ResizeObserver(syncMobileHeaderHeight).observe(siteHeader);
+
       const filmItems = [
         {
           title: "No More Movies",

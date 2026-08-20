@@ -147,5 +147,7 @@ assert.match(css, /\.faces-scroll \{[\s\S]*?overflow-y:\s*auto;/, "Expected the 
 assert.match(css, /\.faces-window::before,[\s\S]*?\.faces-window::after/, "Expected matching FACES fades above and below the window");
 assert.match(css, /\.faces-window \{[\s\S]*?width:\s*100%;/, "Expected FACES to use the full page width");
 assert.ok(statSync(new URL("../assets/faces/faces-collage.jpg", import.meta.url)).size < 1_500_000, "Expected an optimized FACES collage");
+assert.match(css, /scroll-padding-top:\s*calc\(var\(--mobile-header-height, 143px\) \+ 8px\)/, "Expected mobile anchors to clear the fixed header");
+assert.match(html, /function syncMobileHeaderHeight\(\)/, "Expected the mobile anchor offset to follow the real header height");
 
 console.log("Portfolio checks passed");
