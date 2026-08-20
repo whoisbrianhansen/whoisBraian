@@ -214,7 +214,15 @@
         opacity: 1;
       }
 
-      .video-slide .slide-caption,
+      .video-slide:not(.is-active) {
+        opacity: 0;
+      }
+
+      .video-slide .slide-caption {
+        opacity: 0;
+        transition: opacity 320ms ease;
+      }
+
       .photography-slide .photography-caption {
         opacity: 0.32;
         transition: opacity 320ms ease;
@@ -863,10 +871,6 @@
           credits: [
             ["Written and Directed by", "Brian Hansen"],
             ["Starring", "Camila Araiza"],
-            ["Original Score by", "Agustín Ayala"],
-            ["Sound Production by", "Miguel Cham"],
-            ["Voice-over and Cinematography by", "Brian Hansen"],
-            ["Super 8mm Film Processing and Scanning by", "LAB TANK"],
           ],
           still: "https://i.vimeocdn.com/video/2071306256-d37beba1914ae147e707527c3e86667fc1a6af97c6951a404f28686cd6ac36c1-d_1280?region=us",
           src: "https://player.vimeo.com/video/1038807040?autoplay=1&title=0&byline=0&portrait=0",
@@ -876,24 +880,8 @@
           meta: "Commercial / 2025",
           desc: `Production Company: Stink Mexico
 Director: Brian Hansen
-MD: Vanessa Hernández
-Executive Producer: Daniela Bonilla
-Assistant Producer: Tom Agüero
-DoP: Miguel De Olaso & Josep Pardo
-Wardrobe: Kawa
-Camera Car: Ultimate Arm
-Camera Caer Driver: George Peters
-Arm Operator: John Maurice Betancourt
-Editor & online: Daniel Balleza
-Sound Design: Emmanuel Romero
-Color Gradding: Lisa Tilinger
-Music: Edy Lan
-Agencia:
-Group Creative Director: Arturo Velázquez Rodriguez
-Creative Directors: Temo & Pamela Anaya
-Agency Producer: Amy Kegan Platok
-Account Manager: Vanessa`,
-          creditsColumns: true,
+DoP: MacGregor & Josep Pardo
+MD: Vanessa Hernández`,
           still: "https://i.vimeocdn.com/video/2115269432-40ba383ea2861d95f8d03ea176ce89d746c56f8c83f5751fd62368b0796d7a76-d_1280?region=us",
           src: "https://player.vimeo.com/video/1160375315?autoplay=1&title=0&byline=0&portrait=0",
         },
@@ -908,14 +896,9 @@ Shot & edited by Brian Hansen`,
         {
           title: "Bonita",
           meta: "Music video / 2021",
-          desc: `Official Music Video by Coco Rodriguez
-Produced by Pangea
-Directed by Brian Hansen
-Director of Photography: Mauricio Padilla
-Edited by Mauricio Padilla & Diego Zaldivar
-Executive Producer: Coco Rodriguez
-Colorist: Esteban Robles (Central Films)
-Art Direction & Wardrobe: Pangea`,
+          desc: `Written and directed by Brian Hansen
+DoP: Mauricio Padilla
+Executive Producer: Coco Rodriguez`,
           still: "https://i.vimeocdn.com/video/2115285097-c796450a4f90e58082576130c199a78e72ada7231e82ee15c2a05579bdffb4ff-d_1280?region=us",
           src: "https://player.vimeo.com/video/1160390224?autoplay=1&title=0&byline=0&portrait=0",
         },

@@ -36,12 +36,12 @@ const requiredHtml = [
   "Between old movies<br />and motorcycle trips",
   '["Written and Directed by", "Brian Hansen"]',
   '["Starring", "Camila Araiza"]',
-  '["Original Score by", "Agustín Ayala"]',
-  '["Sound Production by", "Miguel Cham"]',
-  '["Voice-over and Cinematography by", "Brian Hansen"]',
-  '["Super 8mm Film Processing and Scanning by", "LAB TANK"]',
-  "Official Music Video by Coco Rodriguez",
-  "Art Direction & Wardrobe: Pangea",
+  "Written and directed by Brian Hansen",
+  "DoP: Mauricio Padilla",
+  "Executive Producer: Coco Rodriguez",
+  "Production Company: Stink Mexico",
+  "DoP: MacGregor & Josep Pardo",
+  "MD: Vanessa Hernández",
   "A night at a rave in Patagonia. VHS diaries.\nShot & edited by Brian Hansen",
   "moments captured<br />with a Handycam",
   "durante<br />la etapa de su duelo",
@@ -100,6 +100,9 @@ assert.match(html, /deferImages: true/, "Expected below-the-fold carousel loadin
 assert.match(html, /data-srcset="assets\/photography\/web-1200/, "Expected responsive photography assets");
 assert.match(html, /class="description project-credits"/, "Expected film credits to match carousel descriptions");
 assert.match(html, /\.map\(\(\[role, name\]\) => `\$\{role\} \$\{name\}`\)/, "Expected roles and names on one line");
+assert.doesNotMatch(filmItems, /Original Score by|Sound Production by|LAB TANK/, "Expected shortened No More Movies credits");
+assert.doesNotMatch(filmItems, /Produced by Pangea|Art Direction & Wardrobe/, "Expected shortened Bonita credits");
+assert.doesNotMatch(filmItems, /Executive Producer: Daniela Bonilla|Account Manager: Vanessa/, "Expected shortened Chevrolet credits");
 assert.doesNotMatch(css, /\.project-credits dt/, "Expected regular-weight No More Movies credits");
 assert.match(html, /preload="none"/, "Expected local video loading to be deferred until playback");
 assert.match(html, /actorVideo\.pause\(\)/, "Expected PLACEBO pause support");
@@ -110,7 +113,9 @@ assert.doesNotMatch(html, /assets\/actor\/PLACEBO%20COVER\.png/, "Expected the o
 assert.match(css, /--paper:\s*#f7f5ef/, "Expected the off-white site palette");
 assert.match(css, /\.video-track,[\s\S]*?gap:\s*0;/, "Expected flush carousel tracks");
 assert.match(css, /\.slider-controls \{[\s\S]*?position:\s*absolute;/, "Expected overlaid carousel controls");
-assert.match(css, /\.slide-caption \.credits-columns \{[\s\S]*?column-count:\s*2;/, "Expected two-column Chevrolet credits");
-assert.match(css, /opacity:\s*0\.32;/, "Expected subdued captions on adjacent slides");
+assert.doesNotMatch(filmItems, /creditsColumns:\s*true/, "Expected Chevrolet credits to use the standard single-column layout");
+assert.match(css, /\.video-slide:not\(\.is-active\) \{[\s\S]*?opacity:\s*0;/, "Expected side videos to remain fully transparent");
+assert.match(css, /\.video-slide \.slide-caption \{[\s\S]*?opacity:\s*0;/, "Expected side video captions to remain fully transparent");
+assert.match(css, /opacity:\s*0\.32;/, "Expected subdued photography captions on adjacent slides");
 
 console.log("Portfolio checks passed");
