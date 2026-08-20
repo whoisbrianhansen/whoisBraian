@@ -33,6 +33,7 @@ const requiredHtml = [
   "assets/actor/PLACEBO-COVER-web.jpg",
   "assets/actor/PLACEBO-web.m4v",
   "assets/bio/BRIAN-HANSEN-PORTRAIT-web.jpg",
+  "<strong>Brian Alex Hansen</strong> is an actor",
   "assets/faces/faces-collage.jpg",
   "In 2018, he co-founded the <em>Taller Ambulante de Fotografía</em>",
   "<em>Taller Ambulante de Cine Documental</em>",
