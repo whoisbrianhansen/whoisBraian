@@ -30,6 +30,8 @@ const requiredHtml = [
   "assets/actor/PLACEBO-COVER-web.jpg",
   "assets/actor/PLACEBO-web.m4v",
   "assets/bio/BRIAN-HANSEN-PORTRAIT-web.jpg",
+  "In 2018, he co-founded the <em>Taller Ambulante de Fotografía</em>",
+  "<em>Taller Ambulante de Cine Documental</em>",
   "Writer &amp; Director: Sage Bennett",
   "Starring: Sage Bennett &amp; Brian Hansen",
   "I wanted to transform those painpoints into art.",
@@ -131,5 +133,7 @@ assert.match(css, /\.video-slide \.slide-caption \{[\s\S]*?opacity:\s*0;/, "Expe
 assert.match(css, /\.photography-slide:not\(\.is-active\) \{[\s\S]*?opacity:\s*0;/, "Expected side photographs to remain fully transparent");
 assert.match(css, /\.photography-slide \.photography-caption \{[\s\S]*?opacity:\s*0;/, "Expected side photography captions to remain fully transparent");
 assert.match(css, /\.bio-layout \{[\s\S]*?grid-template-columns:/, "Expected the BIO portrait beside the copy");
+assert.match(css, /grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/, "Expected equal-width BIO columns");
+assert.match(css, /\.bio-portrait img \{[\s\S]*?height:\s*100%;[\s\S]*?object-fit:\s*cover;/, "Expected the BIO portrait to match the copy height");
 
 console.log("Portfolio checks passed");

@@ -554,22 +554,29 @@
       }
 
       .bio-layout {
-        width: min(68vw, 860px);
+        width: min(100%, 1120px);
         margin: 0 auto;
         display: grid;
-        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-        gap: clamp(28px, 4vw, 52px);
-        align-items: center;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(30px, 4vw, 54px);
+        align-items: stretch;
       }
 
       .bio-portrait {
+        position: relative;
         margin: 0;
+        min-height: 420px;
+        overflow: hidden;
       }
 
       .bio-portrait img {
+        position: absolute;
+        inset: 0;
         display: block;
         width: 100%;
-        height: auto;
+        height: 100%;
+        object-fit: cover;
+        object-position: 10% center;
       }
 
       .bio-copy {
@@ -673,6 +680,11 @@
           width: 88vw;
           grid-template-columns: 1fr;
           gap: 26px;
+        }
+
+        .bio-portrait {
+          min-height: 0;
+          aspect-ratio: 1600 / 1074;
         }
 
         .video-slider .slider-controls,
@@ -871,6 +883,12 @@
             <p>
               A native Spanish speaker who is fluent in English and Italian, Brian brings depth, adaptability,
               and presence to every role.
+            </p>
+            <p>
+              In 2018, he co-founded the <em>Taller Ambulante de Fotografía</em> and the
+              <em>Taller Ambulante de Cine Documental</em> alongside fellow photographers, with the aim of
+              making the languages of cinema and photography more accessible to communities throughout Latin
+              America.
             </p>
             <p>
               He recently completed his first 35mm photography book, <em>Memento</em>—a visual exploration of
