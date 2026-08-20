@@ -38,7 +38,8 @@ const requiredHtml = [
   "<em>Taller Ambulante de Cine Documental</em>",
   "Writer &amp; Director: Sage Bennett",
   "Starring: Sage Bennett &amp; Brian Hansen",
-  "I wanted to transform those painpoints into art.",
+  '<span class="actor-quote-line">"Short love affairs can leave you feeling less justified in your grief because it was never supposed</span>',
+  '<span class="actor-quote-line">to be serious. I wanted to transform those painpoints into art."</span>',
   '<p class="actor-quote-author">SAGE BENNETT</p>',
   "Between old movies<br />and motorcycle trips",
   '["Written and Directed by", "Brian Hansen"]',
@@ -128,6 +129,9 @@ assert.doesNotMatch(css, /\.project-credits dt/, "Expected regular-weight No Mor
 assert.match(html, /preload="none"/, "Expected local video loading to be deferred until playback");
 assert.match(html, /actorVideo\.pause\(\)/, "Expected PLACEBO pause support");
 assert.match(html, /Pausar PLACEBO/, "Expected an accessible PLACEBO pause control");
+assert.doesNotMatch(html, /Colorist: Nadia Khairat/, "Expected the PLACEBO colorist line to be removed");
+assert.doesNotMatch(html, /serious\.<br \/>I wanted/, "Expected the PLACEBO quote to remain one paragraph");
+assert.match(css, /\.actor-quote-line \{[\s\S]*?white-space:\s*nowrap;/, "Expected the PLACEBO quote to use two desktop lines");
 assert.doesNotMatch(html, /assets\/actor\/PLACEBO\.mp4/, "Expected the GitHub-compatible PLACEBO video");
 assert.doesNotMatch(html, /assets\/actor\/PLACEBO%20COVER\.png/, "Expected the optimized PLACEBO cover");
 

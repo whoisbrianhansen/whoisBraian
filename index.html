@@ -604,6 +604,16 @@
         text-align: center;
       }
 
+      .actor-quote-line {
+        display: block;
+      }
+
+      @media (min-width: 741px) {
+        .actor-quote-line {
+          white-space: nowrap;
+        }
+      }
+
       .actor-copy .actor-quote-author {
         margin-top: -4px;
         color: var(--ink);
@@ -921,8 +931,7 @@
               <p>
                 Writer &amp; Director: Sage Bennett<br />
                 DOP: Alexa Bas<br />
-                Starring: Sage Bennett &amp; Brian Hansen<br />
-                Colorist: Nadia Khairat
+                Starring: Sage Bennett &amp; Brian Hansen
               </p>
             </div>
           </div>
@@ -930,8 +939,8 @@
 
         <div class="actor-copy">
           <p>
-            "Short love affairs can leave you feeling less justified in your grief because it was never
-            supposed to be serious.<br />I wanted to transform those painpoints into art."
+            <span class="actor-quote-line">"Short love affairs can leave you feeling less justified in your grief because it was never supposed</span>
+            <span class="actor-quote-line">to be serious. I wanted to transform those painpoints into art."</span>
           </p>
           <p class="actor-quote-author">SAGE BENNETT</p>
         </div>
