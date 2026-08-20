@@ -19,7 +19,7 @@ const requiredHtml = [
   "MEMENTO",
   'href="#ambulante"',
   'id="ambulante"',
-  "TALLER<br />DE&nbsp;CINE",
+  "FILM<br />WORKSHOP",
   'href="#actor"',
   'id="actor"',
   "SELECTED ACTING WORK",
@@ -86,7 +86,8 @@ const ambulanteItems = html.match(/const ambulanteItems = \[([\s\S]*?)\n\s*\];/)
 
 assert.equal((filmItems.match(/player\.vimeo\.com\/video/g) ?? []).length, 6, "Expected six FILM projects");
 assert.equal((photographyItems.match(/\{ file:/g) ?? []).length, 21, "Expected 21 STILL PHOTO images");
-assert.equal((ambulanteItems.match(/player\.vimeo\.com\/video/g) ?? []).length, 7, "Expected seven TALLER DE CINE projects");
+assert.equal((ambulanteItems.match(/player\.vimeo\.com\/video/g) ?? []).length, 7, "Expected seven FILM WORKSHOP projects");
+assert.equal((ambulanteItems.match(/meta: "Film workshop \/ 20\d{2}"/g) ?? []).length, 7, "Expected FILM WORKSHOP metadata on every project");
 assert.doesNotMatch(
   photographyItems,
   /file: "(?:!\.jpeg|Frisco\.jpeg|Quote\.jpeg)"/,
