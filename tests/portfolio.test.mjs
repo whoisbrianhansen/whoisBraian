@@ -46,8 +46,9 @@ const requiredHtml = [
   "DoP: MacGregor & Josep Pardo",
   "MD: Vanessa Hernández",
   "A night at a rave in Patagonia. VHS diaries.\nShot & edited by Brian Hansen",
-  "moments captured<br />with a Handycam",
-  "with a Handycam during a film workshop in a town in northern Mexico.\nShot & edited by Brian Hansen",
+  '<span class="synopsis-line">A montage exercise that becomes a portrait of a community. Intimate, behind-the-scenes moments captured</span>',
+  '<span class="synopsis-line">with a Handycam during a film workshop in a town in northern Mexico.</span>',
+  '<span class="credit-line">Shot & edited by Brian Hansen</span>',
   '{ file: "Placebo.jpeg", label: "Placebo" }',
   '{ file: "Real de Catorce.jpeg", label: "Real de Catorce" }',
   '{ file: "Tren de Buenos Aires.jpeg", label: "Tren de Buenos Aires" }',
@@ -134,6 +135,8 @@ assert.match(css, /\.photography-slide:not\(\.is-active\) \{[\s\S]*?opacity:\s*0
 assert.match(css, /\.photography-slide \.photography-caption \{[\s\S]*?opacity:\s*0;/, "Expected side photography captions to remain fully transparent");
 assert.match(css, /\.bio-layout \{[\s\S]*?grid-template-columns:/, "Expected the BIO portrait beside the copy");
 assert.match(css, /grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/, "Expected equal-width BIO columns");
-assert.match(css, /\.bio-portrait img \{[\s\S]*?height:\s*100%;[\s\S]*?object-fit:\s*cover;/, "Expected the BIO portrait to match the copy height");
+assert.match(css, /\.bio-portrait img \{[\s\S]*?width:\s*100%;[\s\S]*?height:\s*auto;/, "Expected the complete BIO portrait to remain visible");
+assert.match(css, /\.bio-copy \{[\s\S]*?font-size:\s*13px;[\s\S]*?line-height:\s*1\.48;/, "Expected compact BIO copy beside the portrait");
+assert.match(css, /\.description \.synopsis-line \{[\s\S]*?white-space:\s*nowrap;/, "Expected the Nacozari synopsis to hold its two-line layout on desktop");
 
 console.log("Portfolio checks passed");
