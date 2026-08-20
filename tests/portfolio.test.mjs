@@ -44,6 +44,10 @@ const requiredHtml = [
   "MD: Vanessa Hernández",
   "A night at a rave in Patagonia. VHS diaries.\nShot & edited by Brian Hansen",
   "moments captured<br />with a Handycam",
+  "with a Handycam during a film workshop in a town in northern Mexico.\nShot & edited by Brian Hansen",
+  '{ file: "Placebo.jpeg", label: "Placebo" }',
+  'label: "REAL DE CATOCE"',
+  'label: "TREN PORTEÑO"',
   "durante<br />la etapa de su duelo",
   "el duelo.<br />Un recordatorio",
   "player.vimeo.com/video/1038807040",
@@ -71,8 +75,13 @@ const photographyItems = html.match(/const photographyItems = \[([\s\S]*?)\n\s*\
 const ambulanteItems = html.match(/const ambulanteItems = \[([\s\S]*?)\n\s*\];/)?.[1] ?? "";
 
 assert.equal((filmItems.match(/player\.vimeo\.com\/video/g) ?? []).length, 6, "Expected six FILM projects");
-assert.equal((photographyItems.match(/\{ file:/g) ?? []).length, 23, "Expected 23 STILL PHOTO images");
+assert.equal((photographyItems.match(/\{ file:/g) ?? []).length, 21, "Expected 21 STILL PHOTO images");
 assert.equal((ambulanteItems.match(/player\.vimeo\.com\/video/g) ?? []).length, 7, "Expected seven TALLER DE CINE projects");
+assert.doesNotMatch(
+  photographyItems,
+  /file: "(?:!\.jpeg|Frisco\.jpeg|Quote\.jpeg)"/,
+  "Expected removed photographs to stay out of the carousel",
+);
 
 for (const [, filename] of photographyItems.matchAll(/file: "([^"]+)"/g)) {
   assert.ok(
