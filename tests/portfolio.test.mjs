@@ -29,6 +29,7 @@ const requiredHtml = [
   "assets/memento/memento-cover.jpg",
   "assets/actor/PLACEBO-COVER-web.jpg",
   "assets/actor/PLACEBO-web.m4v",
+  "assets/bio/BRIAN-HANSEN-PORTRAIT-web.jpg",
   "Writer &amp; Director: Sage Bennett",
   "Starring: Sage Bennett &amp; Brian Hansen",
   "I wanted to transform those painpoints into art.",
@@ -46,8 +47,8 @@ const requiredHtml = [
   "moments captured<br />with a Handycam",
   "with a Handycam during a film workshop in a town in northern Mexico.\nShot & edited by Brian Hansen",
   '{ file: "Placebo.jpeg", label: "Placebo" }',
-  'label: "REAL DE CATOCE"',
-  'label: "TREN PORTEÑO"',
+  '{ file: "Real de Catorce.jpeg", label: "Real de Catorce" }',
+  '{ file: "Tren de Buenos Aires.jpeg", label: "Tren de Buenos Aires" }',
   "durante<br />la etapa de su duelo",
   "el duelo.<br />Un recordatorio",
   "player.vimeo.com/video/1038807040",
@@ -66,6 +67,7 @@ for (const asset of [
   "../assets/memento/memento-cover.jpg",
   "../assets/actor/PLACEBO-COVER-web.jpg",
   "../assets/actor/PLACEBO-web.m4v",
+  "../assets/bio/BRIAN-HANSEN-PORTRAIT-web.jpg",
 ]) {
   assert.ok(existsSync(new URL(asset, import.meta.url)), `Expected local asset ${asset}`);
 }
@@ -82,6 +84,7 @@ assert.doesNotMatch(
   /file: "(?:!\.jpeg|Frisco\.jpeg|Quote\.jpeg)"/,
   "Expected removed photographs to stay out of the carousel",
 );
+assert.doesNotMatch(photographyItems, /Real de Catoce|Tren Porteño/, "Expected old photography names to stay removed");
 
 for (const [, filename] of photographyItems.matchAll(/file: "([^"]+)"/g)) {
   assert.ok(
@@ -125,6 +128,8 @@ assert.match(css, /\.slider-controls \{[\s\S]*?position:\s*absolute;/, "Expected
 assert.doesNotMatch(filmItems, /creditsColumns:\s*true/, "Expected Chevrolet credits to use the standard single-column layout");
 assert.match(css, /\.video-slide:not\(\.is-active\) \{[\s\S]*?opacity:\s*0;/, "Expected side videos to remain fully transparent");
 assert.match(css, /\.video-slide \.slide-caption \{[\s\S]*?opacity:\s*0;/, "Expected side video captions to remain fully transparent");
-assert.match(css, /opacity:\s*0\.32;/, "Expected subdued photography captions on adjacent slides");
+assert.match(css, /\.photography-slide:not\(\.is-active\) \{[\s\S]*?opacity:\s*0;/, "Expected side photographs to remain fully transparent");
+assert.match(css, /\.photography-slide \.photography-caption \{[\s\S]*?opacity:\s*0;/, "Expected side photography captions to remain fully transparent");
+assert.match(css, /\.bio-layout \{[\s\S]*?grid-template-columns:/, "Expected the BIO portrait beside the copy");
 
 console.log("Portfolio checks passed");

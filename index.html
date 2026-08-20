@@ -218,13 +218,17 @@
         opacity: 0;
       }
 
+      .photography-slide:not(.is-active) {
+        opacity: 0;
+      }
+
       .video-slide .slide-caption {
         opacity: 0;
         transition: opacity 320ms ease;
       }
 
       .photography-slide .photography-caption {
-        opacity: 0.32;
+        opacity: 0;
         transition: opacity 320ms ease;
       }
 
@@ -549,9 +553,26 @@
         font-weight: 700;
       }
 
-      .bio-copy {
+      .bio-layout {
         width: min(68vw, 860px);
         margin: 0 auto;
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: clamp(28px, 4vw, 52px);
+        align-items: center;
+      }
+
+      .bio-portrait {
+        margin: 0;
+      }
+
+      .bio-portrait img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .bio-copy {
         color: var(--muted);
         font-size: 16px;
         line-height: 1.65;
@@ -648,8 +669,10 @@
           width: 88vw;
         }
 
-        .bio-copy {
+        .bio-layout {
           width: 88vw;
+          grid-template-columns: 1fr;
+          gap: 26px;
         }
 
         .video-slider .slider-controls,
@@ -821,28 +844,41 @@
           </div>
         </div>
 
-        <div class="bio-copy">
-          <p>
-            <strong>Brian Hansen</strong> is an actor, self-taught photographer, and lifelong cinephile,
-            born in Patagonia, Argentina, in October 1987. He began his acting career in Buenos Aires before
-            relocating to Mexico in 2014, where he continued performing while pursuing his path as a film
-            director.
-          </p>
-          <p>
-            Alongside his artistic work, Brian has developed a diverse range of physical skills that enrich
-            his performances. He is an experienced motorcyclist and driver, with training in horseback riding,
-            firearms handling, and fencing.
-          </p>
-          <p>
-            A native Spanish speaker who is fluent in English and Italian, Brian brings depth, adaptability,
-            and presence to every role.
-          </p>
-          <p>
-            He recently completed his first 35mm photography book, <em>Memento</em>—a visual exploration of
-            uncanny, dreamlike moments—which is available for purchase on Amazon. He is currently working on
-            his feature-film directorial debut, <em>La Venganza de Antonio Burboa</em>, a western set in
-            Cananea, Sonora—the cradle of the Mexican Revolution.
-          </p>
+        <div class="bio-layout">
+          <figure class="bio-portrait">
+            <img
+              src="assets/bio/BRIAN-HANSEN-PORTRAIT-web.jpg"
+              alt="Retrato de Brian Hansen"
+              width="1600"
+              height="1074"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+
+          <div class="bio-copy">
+            <p>
+              <strong>Brian Hansen</strong> is an actor, self-taught photographer, and lifelong cinephile,
+              born in Patagonia, Argentina, in October 1987. He began his acting career in Buenos Aires before
+              relocating to Mexico in 2014, where he continued performing while pursuing his path as a film
+              director.
+            </p>
+            <p>
+              Alongside his artistic work, Brian has developed a diverse range of physical skills that enrich
+              his performances. He is an experienced motorcyclist and driver, with training in horseback riding,
+              firearms handling, and fencing.
+            </p>
+            <p>
+              A native Spanish speaker who is fluent in English and Italian, Brian brings depth, adaptability,
+              and presence to every role.
+            </p>
+            <p>
+              He recently completed his first 35mm photography book, <em>Memento</em>—a visual exploration of
+              uncanny, dreamlike moments—which is available for purchase on Amazon. He is currently working on
+              his feature-film directorial debut, <em>La Venganza de Antonio Burboa</em>, a western set in
+              Cananea, Sonora—the cradle of the Mexican Revolution.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -933,8 +969,8 @@ Shot & edited by Brian Hansen`,
         { file: "Out of the blue, and into the black.jpeg", label: "Out of the blue, and into the black" },
         { file: "Placebo.jpeg", label: "Placebo" },
         { file: "Vecchio.jpeg", label: "Vecchio" },
-        { file: "Real de Catoce.jpeg", label: "REAL DE CATOCE" },
-        { file: "Tren Porteño.jpeg", label: "TREN PORTEÑO" },
+        { file: "Real de Catorce.jpeg", label: "Real de Catorce" },
+        { file: "Tren de Buenos Aires.jpeg", label: "Tren de Buenos Aires" },
         { file: "Be water my friend....jpeg", label: "Be water my friend..." },
         { file: "Chupacabras.jpeg", label: "Chupacabras" },
         { file: "Florida.jpeg", label: "Florida" },
