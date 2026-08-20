@@ -55,6 +55,7 @@ const requiredHtml = [
   '<span class="synopsis-line">with a Handycam during a film workshop in a town in northern Mexico.</span>',
   '<span class="credit-line">Shot & edited by Brian Hansen</span>',
   '{ file: "Placebo.jpeg", label: "Placebo" }',
+  '{ file: "Out of the blue and into the black.jpeg", label: "Out of the blue and into the black" }',
   '{ file: "Real de Catorce.jpeg", label: "Real de Catorce" }',
   '{ file: "Tren de Buenos Aires.jpeg", label: "Tren de Buenos Aires" }',
   "durante<br />la etapa de su duelo",
@@ -95,6 +96,7 @@ assert.doesNotMatch(
   "Expected removed photographs to stay out of the carousel",
 );
 assert.doesNotMatch(photographyItems, /Real de Catoce|Tren Porteño/, "Expected old photography names to stay removed");
+assert.doesNotMatch(photographyItems, /Out of the blue, and into the black/, "Expected the old comma to stay removed");
 
 for (const [, filename] of photographyItems.matchAll(/file: "([^"]+)"/g)) {
   assert.ok(
