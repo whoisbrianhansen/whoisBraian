@@ -145,6 +145,10 @@ assert.doesNotMatch(html, /assets\/actor\/PLACEBO\.mp4/, "Expected the GitHub-co
 assert.doesNotMatch(html, /assets\/actor\/PLACEBO%20COVER\.png/, "Expected the optimized PLACEBO cover");
 
 assert.match(css, /--paper:\s*#f7f5ef/, "Expected the off-white site palette");
+assert.match(html, /<title>Brian Hansen \/ Director &amp; Photographer<\/title>/, "Expected the requested browser title");
+assert.match(html, /property="og:title" content="Brian Hansen \/ Director &amp; Photographer"/, "Expected the requested social preview title");
+assert.match(html, /property="og:description" content=""/, "Expected no social preview description");
+assert.doesNotMatch(html, /name="description"/, "Expected the old social preview description to be removed");
 assert.match(css, /\.video-track,[\s\S]*?gap:\s*0;/, "Expected flush carousel tracks");
 assert.match(css, /\.slider-controls \{[\s\S]*?position:\s*absolute;/, "Expected overlaid carousel controls");
 assert.doesNotMatch(filmItems, /creditsColumns:\s*true/, "Expected Chevrolet credits to use the standard single-column layout");
