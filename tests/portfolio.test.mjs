@@ -160,6 +160,7 @@ assert.match(css, /\.description \.synopsis-line \{[\s\S]*?white-space:\s*nowrap
 assert.match(css, /\.faces-scroll \{[\s\S]*?overflow-y:\s*auto;/, "Expected the FACES archive to scroll inside its window");
 assert.match(css, /\.faces-window::before,[\s\S]*?\.faces-window::after/, "Expected matching FACES fades above and below the window");
 assert.match(css, /\.faces-window \{[\s\S]*?width:\s*100%;/, "Expected FACES to use the full page width");
+assert.match(css, /\.faces-window \{[\s\S]*?background:\s*var\(--paper\);/, "Expected the FACES window to match the page background");
 assert.ok(statSync(new URL("../assets/faces/faces-collage.jpg", import.meta.url)).size < 1_500_000, "Expected an optimized FACES collage");
 assert.ok(statSync(new URL("../assets/faces/faces-collage@2x.jpg", import.meta.url)).size < 6_000_000, "Expected an optimized high-resolution FACES collage");
 assert.match(css, /scroll-padding-top:\s*calc\(var\(--mobile-header-height, 143px\) \+ 8px\)/, "Expected mobile anchors to clear the fixed header");
