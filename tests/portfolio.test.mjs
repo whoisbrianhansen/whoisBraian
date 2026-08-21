@@ -159,6 +159,7 @@ assert.match(css, /\.bio-copy \{[\s\S]*?font-size:\s*13px;[\s\S]*?line-height:\s
 assert.match(css, /\.description \.synopsis-line \{[\s\S]*?white-space:\s*nowrap;/, "Expected the Nacozari synopsis to hold its two-line layout on desktop");
 assert.match(css, /\.faces-scroll \{[\s\S]*?overflow-y:\s*auto;/, "Expected the FACES archive to scroll inside its window");
 assert.match(css, /\.faces-window::before,[\s\S]*?\.faces-window::after/, "Expected matching FACES fades above and below the window");
+assert.match(css, /\.faces-window::before,[\s\S]*?height:\s*14%;/, "Expected compact FACES fades for a wider viewing area");
 assert.match(css, /\.faces-window \{[\s\S]*?width:\s*100%;/, "Expected FACES to use the full page width");
 assert.match(css, /\.faces-window \{[\s\S]*?background:\s*var\(--paper\);/, "Expected the FACES window to match the page background");
 assert.ok(statSync(new URL("../assets/faces/faces-collage.jpg", import.meta.url)).size < 1_500_000, "Expected an optimized FACES collage");
