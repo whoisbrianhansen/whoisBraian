@@ -157,5 +157,6 @@ assert.match(css, /\.faces-window \{[\s\S]*?width:\s*100%;/, "Expected FACES to 
 assert.ok(statSync(new URL("../assets/faces/faces-collage.jpg", import.meta.url)).size < 1_500_000, "Expected an optimized FACES collage");
 assert.match(css, /scroll-padding-top:\s*calc\(var\(--mobile-header-height, 143px\) \+ 8px\)/, "Expected mobile anchors to clear the fixed header");
 assert.match(html, /function syncMobileHeaderHeight\(\)/, "Expected the mobile anchor offset to follow the real header height");
+assert.doesNotMatch(html, /Alongside his artistic work|A native Spanish speaker/, "Expected the removed BIO paragraphs to stay removed");
 
 console.log("Portfolio checks passed");
