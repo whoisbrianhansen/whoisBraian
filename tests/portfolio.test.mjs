@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync, statSync } from "node:fs";
 
 const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+const head = html.match(/<head>([\s\S]*?)<\/head>/)?.[1] ?? "";
 const css = html.match(/<style>([\s\S]*?)<\/style>/)?.[1] ?? "";
 
 const requiredHtml = [
@@ -147,8 +148,10 @@ assert.doesNotMatch(html, /assets\/actor\/PLACEBO%20COVER\.png/, "Expected the o
 assert.match(css, /--paper:\s*#f7f5ef/, "Expected the off-white site palette");
 assert.match(html, /<title>Brian Hansen \/ Director &amp; Photographer<\/title>/, "Expected the requested browser title");
 assert.match(html, /property="og:title" content="Brian Hansen \/ Director &amp; Photographer"/, "Expected the requested social preview title");
-assert.match(html, /property="og:description" content=""/, "Expected no social preview description");
-assert.doesNotMatch(html, /name="description"/, "Expected the old social preview description to be removed");
+assert.match(html, /name="description" content="&#8203;"/, "Expected an invisible fallback description");
+assert.match(html, /property="og:description" content="&#8203;"/, "Expected an invisible social preview description");
+assert.match(html, /name="twitter:description" content="&#8203;"/, "Expected an invisible Twitter preview description");
+assert.doesNotMatch(head, /Portfolio de Brian Hansen|Short love affairs can leave you feeling/, "Expected no visible social preview description");
 assert.match(css, /\.video-track,[\s\S]*?gap:\s*0;/, "Expected flush carousel tracks");
 assert.match(css, /\.slider-controls \{[\s\S]*?position:\s*absolute;/, "Expected overlaid carousel controls");
 assert.doesNotMatch(filmItems, /creditsColumns:\s*true/, "Expected Chevrolet credits to use the standard single-column layout");
