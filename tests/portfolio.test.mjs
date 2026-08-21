@@ -34,7 +34,6 @@ const requiredHtml = [
   "assets/actor/PLACEBO-web.m4v",
   "assets/bio/BRIAN-HANSEN-PORTRAIT-web.jpg",
   "<strong>Brian Alex Hansen</strong> is an actor",
-  "assets/faces/faces-collage.jpg",
   "assets/faces/faces-collage@2x.jpg",
   'width="1140"',
   'height="11242"',
@@ -76,6 +75,8 @@ const requiredHtml = [
 for (const snippet of requiredHtml) {
   assert.ok(html.includes(snippet), `Expected index.html to include ${snippet}`);
 }
+
+assert.doesNotMatch(html, /faces-collage\.jpg[^\"]*\s+1140w/, "Expected every device to use the high-resolution FACES collage");
 
 for (const asset of [
   "../assets/memento/memento-cover.jpg",
