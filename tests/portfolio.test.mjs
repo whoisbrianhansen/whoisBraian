@@ -35,6 +35,7 @@ const requiredHtml = [
   "assets/bio/BRIAN-HANSEN-PORTRAIT-web.jpg",
   "<strong>Brian Alex Hansen</strong> is an actor",
   "assets/faces/faces-collage.jpg",
+  "assets/faces/faces-collage@2x.jpg",
   'width="1140"',
   'height="11242"',
   "In 2018, he co-founded the <em>Taller Ambulante de Fotografía</em>",
@@ -159,6 +160,7 @@ assert.match(css, /\.faces-scroll \{[\s\S]*?overflow-y:\s*auto;/, "Expected the 
 assert.match(css, /\.faces-window::before,[\s\S]*?\.faces-window::after/, "Expected matching FACES fades above and below the window");
 assert.match(css, /\.faces-window \{[\s\S]*?width:\s*100%;/, "Expected FACES to use the full page width");
 assert.ok(statSync(new URL("../assets/faces/faces-collage.jpg", import.meta.url)).size < 1_500_000, "Expected an optimized FACES collage");
+assert.ok(statSync(new URL("../assets/faces/faces-collage@2x.jpg", import.meta.url)).size < 6_000_000, "Expected an optimized high-resolution FACES collage");
 assert.match(css, /scroll-padding-top:\s*calc\(var\(--mobile-header-height, 143px\) \+ 8px\)/, "Expected mobile anchors to clear the fixed header");
 assert.match(html, /function syncMobileHeaderHeight\(\)/, "Expected the mobile anchor offset to follow the real header height");
 assert.doesNotMatch(html, /Alongside his artistic work|A native Spanish speaker/, "Expected the removed BIO paragraphs to stay removed");
