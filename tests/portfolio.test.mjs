@@ -43,7 +43,7 @@ const requiredHtml = [
   '<span class="actor-quote-line">to be serious. I wanted to transform those painpoints into art."</span>',
   '<p class="actor-quote-author">SAGE BENNETT</p>',
   "Between old movies<br />and motorcycle trips",
-  '["Written and Directed by", "Brian Hansen"]',
+  '["Written and directed by", "Brian Hansen"]',
   '["Starring", "Camila Araiza"]',
   "Written and directed by Brian Hansen",
   "DoP: Mauricio Padilla",
@@ -57,6 +57,7 @@ const requiredHtml = [
   '<span class="credit-line">Shot & edited by Brian Hansen</span>',
   '{ file: "Placebo.jpeg", label: "Placebo" }',
   '{ file: "Out of the blue and into the black.jpeg", label: "Out of the blue and into the black" }',
+  '{ file: "Nubes Madrileñas.jpeg", label: "Nubes Madrileñas" }',
   '{ file: "Real de Catorce.jpeg", label: "Real de Catorce" }',
   '{ file: "Tren de Buenos Aires.jpeg", label: "Tren de Buenos Aires" }',
   "durante<br />la etapa de su duelo",
@@ -98,6 +99,7 @@ assert.doesNotMatch(
 );
 assert.doesNotMatch(photographyItems, /Real de Catoce|Tren Porteño/, "Expected old photography names to stay removed");
 assert.doesNotMatch(photographyItems, /Out of the blue, and into the black/, "Expected the old comma to stay removed");
+assert.doesNotMatch(photographyItems, /Hey you! Get of my cloud!/, "Expected the replaced photography title to stay removed");
 
 for (const [, filename] of photographyItems.matchAll(/file: "([^"]+)"/g)) {
   assert.ok(
