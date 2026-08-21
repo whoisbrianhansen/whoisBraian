@@ -36,7 +36,7 @@ const requiredHtml = [
   "<strong>Brian Alex Hansen</strong> is an actor",
   "assets/faces/faces-collage.jpg",
   'width="1140"',
-  'height="11280"',
+  'height="11250"',
   "In 2018, he co-founded the <em>Taller Ambulante de Fotografía</em>",
   "<em>Taller Ambulante de Cine Documental</em>",
   "Writer &amp; Director: Sage Bennett",
